@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState} from "react";
 import classes from "./style.module.css";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import MenuItem from "../MenuItem/MenuItem";
