@@ -1,39 +1,49 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import classes from "./style.module.css";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import MenuItem from "../MenuItem/MenuItem";
+import HorsesList from "../../pages/Horses/HorsesList";
+import useHorses from "../../hooks/useHorses";
 
-const Layout = (props) =>{
+const Layout = (props) => {
+	const [page, setPage] = useState("home");
+	const { horses } = useHorses();
 
-    const [page,setPage] = useState("home");
+	const handlerGoPage = (action) => {
+		setPage(action);
+	};
 
-    const handlerGoPage = (action) =>{
-        setPage(action);
-    }
-
-    
-
-    return (
-        <React.Fragment>
-
-        <header>
-            header
-        </header>
-        <div className={classes.layoutbody}>
-        <div id="sidebar" className={classes.sidebar}>
-            <MenuItem label="Cavalli" image="" action="cavalli" goPage={handlerGoPage} />
-            <MenuItem label="Farmaci" image="" action="farmaci" goPage={handlerGoPage} />
-        </div>
-        <div id="content" className={classes.content}>
-           <Dashboard load={page}></Dashboard>
-        </div>
-        </div>
-        <footer>
-            footer
-        </footer>
-
-        </React.Fragment>
-    );
-
-}
+	return (
+		<React.Fragment>
+			<header>header</header>
+			<div className={classes.layoutbody}>
+				<div id="sidebar" className={classes.sidebar}>
+					<MenuItem
+						label="Home"
+						image=""
+						action="home"
+						goPage={handlerGoPage}
+					/>
+					<MenuItem
+						label="Cavalli"
+						image=""
+						action="horses"
+						goPage={handlerGoPage}
+					/>
+					<MenuItem
+						label="Farmaci"
+						image=""
+						action="farmaci"
+						goPage={handlerGoPage}
+					/>
+				</div>
+				<div id="content" className={classes.content}>
+					{page === "home" && <Dashboard load={page} />}
+					{page === "horses" && <HorsesList horses={horses} />}
+				</div>
+			</div>
+			<footer>footer</footer>
+		</React.Fragment>
+	);
+};
 export default Layout;

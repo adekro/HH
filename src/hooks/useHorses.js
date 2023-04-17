@@ -1,48 +1,46 @@
 import { useCallback, useEffect } from "react";
 import { useState } from "react";
-import horseLoader from "../data/horsesLoader";
+import horseLoader from "../data/horseLoader";
 
 const useHorses = () => {
-  const [horses, setHorses] = useState([]);
+	const [horses, setHorses] = useState([]);
 
-  useEffect(() => {
-    horseLoader.init();
-    setHorses(horseLoader.getItems());
-  }, []);
+	useEffect(() => {
+		horseLoader.init();
+		setHorses(horseLoader.getItems());
+	}, []);
 
-  const addHorse = useCallback((newHorse) => {
-    setHorses((previousHorses) => {
-      const updated = previousHorses.concat(newHorse);
+	const addHorse = useCallback((newHorse) => {
+		setHorses((previousHorses) => {
+			const updated = previousHorses.concat(newHorse);
 
-      return updated;
-    });
-  }, []);
+			return updated;
+		});
+	}, []);
 
-  const removeHorse = useCallback((id) => {
-    setHorses((previousHorses) => {
-      const updated = previousHorses.filter(
-        (horse) => horse.id !== id
-      );
+	const removeHorse = useCallback((id) => {
+		setHorses((previousHorses) => {
+			const updated = previousHorses.filter((horse) => horse.id !== id);
 
-      return updated;
-    });
-  }, []);
+			return updated;
+		});
+	}, []);
 
-  const updatedHorse = useCallback((id, updatedHorse) => {
-    setHorses((previousHorses) => {
-      const horseToUpdate = {
-        ...previousHorses.find((horse) => horse.id === id),
-        ...updatedHorse,
-      };
-      const updated = previousHorses.map((horse) =>
-      horse.id === id ? horseToUpdate : horse
-      );
+	const updatedHorse = useCallback((id, updatedHorse) => {
+		setHorses((previousHorses) => {
+			const horseToUpdate = {
+				...previousHorses.find((horse) => horse.id === id),
+				...updatedHorse,
+			};
+			const updated = previousHorses.map((horse) =>
+				horse.id === id ? horseToUpdate : horse
+			);
 
-      return updated;
-    });
-  }, []);
+			return updated;
+		});
+	}, []);
 
-  return { horses, addHorse, removeHorse, updatedHorse };
+	return { horses, addHorse, removeHorse, updatedHorse };
 };
 
 export default useHorses;
