@@ -4,18 +4,29 @@ import Dashboard from "../../pages/Dashboard/Dashboard";
 import MenuItem from "../MenuItem/MenuItem";
 import HorsesList from "../../pages/Horses/HorsesList";
 import useHorses from "../../hooks/useHorses";
+import { Button } from "adekroui";
+import Lands from "../Lands/Lands";
 
 const Layout = (props) => {
   const [page, setPage] = useState("home");
+  const [land, setLend] = useState(false);
   const { horses } = useHorses();
 
   const handlerGoPage = (action) => {
     setPage(action);
   };
+  const loadland = () => {
+    setLend((prevl) => {
+      return !prevl;
+    });
+  };
 
   return (
     <React.Fragment>
-      <header>header</header>
+      <header>
+        header
+        <Button onClick={loadland}>ciao</Button>
+      </header>
       <div className={classes.layoutbody}>
         <div id="sidebar" className={classes.sidebar}>
           <div className={classes.sidebarcontent}>
@@ -42,6 +53,7 @@ const Layout = (props) => {
           </div>
         </div>
         <div id="content" className={classes.content}>
+          {land && <Lands></Lands>}
           {page === "home" && <Dashboard load={page} />}
           {page === "horses" && <HorsesList horses={horses} />}
         </div>
