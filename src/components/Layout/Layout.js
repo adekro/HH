@@ -5,7 +5,7 @@ import MenuItem from "../MenuItem/MenuItem";
 import HorsesList from "../../pages/Horses/HorsesList";
 import useHorses from "../../hooks/useHorses";
 import { Button } from "adekroui";
-import Lands from "../Lands/Lands";
+import LandsRegistryMap from "../LandsRegistryMap/LandsRegistryMap";
 
 const Layout = (props) => {
   const [page, setPage] = useState("home");
@@ -53,7 +53,7 @@ const Layout = (props) => {
           </div>
         </div>
         <div id="content" className={classes.content}>
-          {land && <Lands></Lands>}
+          {land && <LandsRegistryMap />}
           {page === "home" && <Dashboard load={page} />}
           {page === "horses" && <HorsesList horses={horses} />}
         </div>
